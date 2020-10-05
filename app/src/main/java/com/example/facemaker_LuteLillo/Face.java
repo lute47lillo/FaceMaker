@@ -5,18 +5,24 @@ Project FaceMaker
 */
 
 package com.example.facemaker_LuteLillo;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.util.AttributeSet;
+import android.view.SurfaceView;
+
 import java.util.Random;
 
 
 
-public class Face {
+public class Face extends SurfaceView {
 
     private int skinColor;              //Creating the fields for the class Face.
     private int eyeColor;
     private int hairColor;
     private int hairStyle;
 
-    public Face(){                                                  //Initializing them from the constructor.
+    public Face(Context context, AttributeSet attr){
+        super(context, (AttributeSet) attr);                                                  //Initializing them from the constructor.
 
         randomize(skinColor, eyeColor, hairColor, hairStyle);       //Calling the randomize method to create a random face by assigning random values to its fields.
 
@@ -37,6 +43,11 @@ public class Face {
         this.hairStyle = hairStyle;
 
         //System.out.println("The random numbers are:" + skinColor + "," + eyeColor + "," + hairColor + "," + hairStyle);  //Error-check.
+    }
+
+    public void onDraw(Canvas canvas){
+        
+
     }
 
     /*
