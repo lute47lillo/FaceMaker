@@ -7,15 +7,16 @@ import android.graphics.Paint;
 
 import android.util.AttributeSet;
 import android.view.SurfaceView;
-import android.widget.SeekBar;
-import android.widget.Spinner;
+
 
 import java.util.Random;
 
 public class FaceView extends SurfaceView{
 
+    //Instance of other classes.
     private Face aidFace = new Face();
 
+    //Variables for this class, are used in the Controller class too.
     Paint paintFace = new Paint();
     Paint paintEye = new Paint();
     Paint paintHair = new Paint();
@@ -29,7 +30,7 @@ public class FaceView extends SurfaceView{
     private float height=800.0f;
     private float width=600.0f;
 
-
+    //Constructor for the view, sets background in white and draws the canvas.
     public FaceView(Context context, AttributeSet attr){
         super(context, attr);
         setWillNotDraw(false);
@@ -55,6 +56,7 @@ public class FaceView extends SurfaceView{
         return aidFace;
     }
 
+    //Sets the colors from the controller class into the variables of this class.
     public void getColors(){
         paintFace.setColor(aidFace.skinColor);
         paintEye.setColor(aidFace.eyeColor);
@@ -62,7 +64,7 @@ public class FaceView extends SurfaceView{
         return;
     }
 
-
+    //Draws face, if random is pressed, values are therefore random. On the other hand it will get them from getColors().
     public void drawFace(Canvas canvas){
 
         if(aidFace.isRandom) {
@@ -80,7 +82,17 @@ public class FaceView extends SurfaceView{
         }
     }
 
+    //Draw the eye consisting in pupil and the colored part of the eye itself.
     public void drawEyes(Canvas canvas){
+
+        /*
+        External Citation
+        Date: 10/5/2020
+        Problem: For all the drawings I had to look up a lot of videos to figure out how to draw it
+        on the specific points that I wanted.
+        Resource: Numerous videos and pages, but not one in concrete.
+        */
+
         Paint pupilEye = new Paint();
         pupilEye.setColor(Color.BLACK);
         paintEye.setColor(aidFace.eyeColor);
@@ -109,10 +121,14 @@ public class FaceView extends SurfaceView{
         canvas.drawCircle(centerEyeX,centerEyeY,8, pupilEye);
     }
 
+    //Draws a big happy smile.
     public void drawMouth(Canvas canvas){
+
+        //Sets the color to red
         Paint mouthColor = new Paint();
         mouthColor.setColor(Color.RED);
 
+        //Or is set to be random when that action is triggered.
         if(aidFace.isRandom){
             Random rand = new Random();
             mouthColor.setColor(Color.argb(255, rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)));
@@ -126,6 +142,7 @@ public class FaceView extends SurfaceView{
 
     }
 
+    //Draws the hair. Uses getColors() to fill it and the style is based on the spinner selection.
     private void drawHair(Canvas canvas) {
 
       if(aidFace.hairStyle == 0) {
@@ -168,6 +185,7 @@ public class FaceView extends SurfaceView{
 
     }
 
+    //Draws the Face
     public void onDraw(Canvas canvas){
         super.onDraw(canvas);
         drawFace(canvas);

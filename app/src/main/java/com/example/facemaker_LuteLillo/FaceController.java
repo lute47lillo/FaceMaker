@@ -4,65 +4,89 @@ import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 
 public class FaceController implements SeekBar.OnSeekBarChangeListener, Spinner.OnItemSelectedListener, RadioGroup.OnClickListener {
 
+    //Instances of other classes.
     private Face aidContrFace;
     private FaceView viewContr;
+
+    //Variables for this class.
     private int actionButton = 0;
 
     private SeekBar redSeek;
     private SeekBar blueSeek;
     private SeekBar greenSeek;
 
+    private Spinner randChange;
+
     private int redBar;
     private int blueBar;
     private int greenBar;
 
+    //Constructor Controller Class
     public FaceController(FaceView view) {
         viewContr = view;
         aidContrFace = view.getFace();
     }
 
+    //Initialize the values of the seekBar
     public void setSeek(SeekBar red, SeekBar green, SeekBar blue) {
         redSeek = red;
         blueSeek = blue;
         greenSeek = green;
     }
 
+    //Updates the values of the seekBars depending on the button selected.
     public void updateSeek(){
 
-        if(actionButton == 1){
+        if(actionButton == 1){ //Skin button
 
-
-            //External Citation
+            /*
+        External Citation
+        Date: 10/5/2020
+        Problem: I didn't know how to access the red, blue, green values of the color.
+        Resource: https://developer.android.com/reference/android/graphics/Color
+        */
 
             redBar = Color.red(aidContrFace.skinColor);
             greenBar = Color.green(aidContrFace.skinColor);
             blueBar = Color.blue(aidContrFace.skinColor);
 
-        }else if(actionButton == 2){
+        }else if(actionButton == 2){ //Eye button
 
             redBar = Color.red(aidContrFace.eyeColor);
             greenBar = Color.green(aidContrFace.eyeColor);
             blueBar = Color.blue(aidContrFace.eyeColor);
 
-        }else if(actionButton == 3){
+        }else if(actionButton == 3){ //Hair button
 
             redBar = Color.red(aidContrFace.hairColor);
             greenBar = Color.green(aidContrFace.hairColor);
             blueBar= Color.blue(aidContrFace.hairColor);
 
         }
+
         redSeek.setProgress(redBar);
         greenSeek.setProgress(greenBar);
         blueSeek.setProgress(blueBar);
 
     }
+
+    //Initializes the spinner
+    public void setSpinner(Spinner rand){
+        randChange = rand;
+    }
+
+    //Updates the spinner when random button is clicked.
+    public void updateSpinner(){
+        randChange.setSelection(aidContrFace.hairStyle);
+    }
+
+    //Actions depending on the button selected.
     @Override
     public void onClick(View v) {
         /*
@@ -74,60 +98,61 @@ public class FaceController implements SeekBar.OnSeekBarChangeListener, Spinner.
 
         switch(v.getId()){
             case R.id.randomBtt:
-                aidContrFace.isRandom = true;
+
+                updateSpinner();
+                aidContrFace.isRandom = true;  //Sets the face to be a random creation.
                 actionButton = 0;
-                updateSeek();
                 break;
+
             case R.id.skinBtt:
+
                 aidContrFace.isRandom = false;
                 actionButton = 1;
                 updateSeek();
                 break;
+
             case R.id.eyeBtt:
+
                 aidContrFace.isRandom = false;
                 actionButton = 2;
                 updateSeek();
                 break;
+
             case R.id.hairBtt:
+
                 aidContrFace.isRandom = false;
                 actionButton = 3;
                 updateSeek();
                 break;
+
         }
-        Log.i(null, "onClick: " + actionButton);
         this.viewContr.invalidate();
 
     }
 
+    //Changes Hair style depending on the selection of the user.
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        //adapterView.getItemAtPosition(i); //0 punk, 1 bunny tail, 2 bald
-
-
         aidContrFace.hairStyle = i;
         aidContrFace.isRandom = false;
-
-        Log.i(null, "onItemSelected: " + aidContrFace.hairStyle);
-        if(actionButton == 0){
-            Log.i(null, "onItemSelected: " + aidContrFace.hairStyle);
-            //i = aidContrFace.hairStyle;
-
-        }
-
-
-
         this.viewContr.invalidate();
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
     }
 
+    //Changes the progress of the seekBars when the user executes an action over them.
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
-       // *External Citation*
+        /*
+        External Citation
+        Date: 10/5/2020
+        Problem: I didn't know how to work with different seekBars at the same time. I was guided by the
+        example on the page.
+        Resource: https://stackoverflow.com/questions/8719632/multiple-seekbars-listener/13468578
+        */
 
         if(seekBar.getId() == R.id.blue){
             viewContr.blueColorSeek = i;
@@ -139,9 +164,9 @@ public class FaceController implements SeekBar.OnSeekBarChangeListener, Spinner.
             viewContr.redColorSeek = i;
         }
 
-
         int colorSeek = Color.argb(255, viewContr.redColorSeek,viewContr.greenColorSeek,viewContr.blueColorSeek);
 
+        //Changes the color of the part that was selected due the change in the seekbars.
         switch (actionButton){
             case 0:
                 break;

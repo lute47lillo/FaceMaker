@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         Button randomize = findViewById(R.id.randomBtt);
         randomize.setOnClickListener(controller);
 
+        //Create and register the buttons.
         Button skinB = findViewById(R.id.skinBtt);
         skinB.setOnClickListener(controller);
         Button hairB = findViewById(R.id.hairBtt);
@@ -38,9 +39,11 @@ public class MainActivity extends AppCompatActivity {
         Button eyeB = findViewById(R.id.eyeBtt);
         eyeB.setOnClickListener(controller);
 
+        //Create and register the spinner
         Spinner styleHair = findViewById(R.id.spinner);
         styleHair.setOnItemSelectedListener(controller);
 
+        //Create and register the SeekBars
         SeekBar red = findViewById(R.id.red);
         red.setOnSeekBarChangeListener(controller);
         SeekBar blue = findViewById(R.id.blue);
@@ -48,7 +51,9 @@ public class MainActivity extends AppCompatActivity {
         SeekBar green = findViewById(R.id.green);
         green.setOnSeekBarChangeListener(controller);
 
+        //Methods to set SeekBars and Spinners after some change.
         controller.setSeek(red, green, blue);
+        controller.setSpinner(styleHair);
 
 
     }
