@@ -27,7 +27,7 @@ public class Face {
     public void randomize(int skinColor, int eyeColor, int hairColor, int hairStyle){
         Random random = new Random();                               //Instantiation of the class Random.
 
-        skinColor = getRandomColor();                      //Assigns a random int from 0 to 255.
+        skinColor = getRandomColor();
         eyeColor = getRandomColor();
         hairColor = getRandomColor();
 

@@ -7,6 +7,8 @@ import android.graphics.Paint;
 
 import android.util.AttributeSet;
 import android.view.SurfaceView;
+import android.widget.SeekBar;
+import android.widget.Spinner;
 
 import java.util.Random;
 
@@ -20,7 +22,7 @@ public class FaceView extends SurfaceView{
 
     int redColorSeek;
     int blueColorSeek;
-    int greeColorSeek;
+    int greenColorSeek;
 
     private float centerX = 550.0f;
     private float centerY = 500.0f;
@@ -60,11 +62,11 @@ public class FaceView extends SurfaceView{
         return;
     }
 
+
     public void drawFace(Canvas canvas){
 
         if(aidFace.isRandom) {
             aidFace.randomize(aidFace.skinColor,aidFace.eyeColor,aidFace.hairColor, aidFace.hairStyle);
-
             paintFace.setColor(aidFace.skinColor);
             paintHair.setColor(aidFace.hairColor);
             paintEye.setColor(aidFace.eyeColor);
@@ -170,11 +172,6 @@ public class FaceView extends SurfaceView{
         drawHair(canvas);
         drawEyes(canvas);
         drawMouth(canvas);
-
-
-
     }
-
-
-
+    
 }
