@@ -66,6 +66,7 @@ public class FaceView extends SurfaceView{
     public void drawFace(Canvas canvas){
 
         if(aidFace.isRandom) {
+
             aidFace.randomize(aidFace.skinColor,aidFace.eyeColor,aidFace.hairColor, aidFace.hairStyle);
             paintFace.setColor(aidFace.skinColor);
             paintHair.setColor(aidFace.hairColor);
@@ -141,27 +142,28 @@ public class FaceView extends SurfaceView{
 
        }else if (aidFace.hairStyle == 1){
 
-          //BALD
-          /*No hair in this case*/
+          //BUNNY - TAIL
+
+          float leftHair = centerX - width / 5;
+          float topHair = centerY - height / 3;
+          float widthHair = centerX + width /3 ;
+          float heightHair = centerY - 150.0f;
+
+          getColors();
+          canvas.drawOval(leftHair, topHair, widthHair, heightHair, paintHair);
+
+          leftHair = centerX * 2.3f - width +200.0f  ;
+          topHair = centerY - height / 2 ;
+          widthHair = centerX + width / 8 ;
+          heightHair = centerY - 150.0f;
+
+          canvas.drawOval(leftHair, topHair, widthHair, heightHair, paintHair);
 
        }else{
 
-           //BUNNY - TAIL
+          //BALD
+          /*No hair in this case*/
 
-           float leftHair = centerX - width / 5;
-           float topHair = centerY - height / 3;
-           float widthHair = centerX + width /3 ;
-           float heightHair = centerY - 150.0f;
-
-           getColors();
-           canvas.drawOval(leftHair, topHair, widthHair, heightHair, paintHair);
-
-           leftHair = centerX * 2.3f - width +200.0f  ;
-           topHair = centerY - height / 2 ;
-           widthHair = centerX + width / 8 ;
-           heightHair = centerY - 150.0f;
-
-           canvas.drawOval(leftHair, topHair, widthHair, heightHair, paintHair);
        }
 
     }
@@ -173,5 +175,5 @@ public class FaceView extends SurfaceView{
         drawEyes(canvas);
         drawMouth(canvas);
     }
-    
+
 }

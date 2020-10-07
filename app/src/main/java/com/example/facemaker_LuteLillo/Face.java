@@ -34,6 +34,7 @@ public class Face {
         hairStyle = (int)(Math.random() * 3);
 
 
+
         this.skinColor = skinColor;                                  //Assigning the values to the fields of the class.
         this.eyeColor = eyeColor;
         this.hairColor = hairColor;

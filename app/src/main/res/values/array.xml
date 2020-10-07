@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string-array name="spinnerItems">
-        <item>Afro</item>
-        <item>Buzz Cut</item>
+        <item>Punk</item>
+        <item>Bunny Tail</item>
         <item>Bald</item>
     </string-array>
 </resources>

@@ -38,6 +38,9 @@ public class FaceController implements SeekBar.OnSeekBarChangeListener, Spinner.
 
         if(actionButton == 1){
 
+
+            //External Citation
+
             redBar = Color.red(aidContrFace.skinColor);
             greenBar = Color.green(aidContrFace.skinColor);
             blueBar = Color.blue(aidContrFace.skinColor);
@@ -98,8 +101,22 @@ public class FaceController implements SeekBar.OnSeekBarChangeListener, Spinner.
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        //adapterView.getItemAtPosition(i); //0 punk, 1 bunny tail, 2 bald
 
 
+        aidContrFace.hairStyle = i;
+        aidContrFace.isRandom = false;
+
+        Log.i(null, "onItemSelected: " + aidContrFace.hairStyle);
+        if(actionButton == 0){
+            Log.i(null, "onItemSelected: " + aidContrFace.hairStyle);
+            //i = aidContrFace.hairStyle;
+
+        }
+
+
+
+        this.viewContr.invalidate();
     }
 
     @Override
@@ -129,7 +146,6 @@ public class FaceController implements SeekBar.OnSeekBarChangeListener, Spinner.
             case 0:
                 break;
             case 1:
-
                 aidContrFace.skinColor = colorSeek;
                 break;
             case 2:
