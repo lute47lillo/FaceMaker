@@ -8,19 +8,22 @@ import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 
-public class FaceController implements SeekBar.OnSeekBarChangeListener, RadioButton.OnClickListener, Spinner.OnItemSelectedListener {
+public class FaceController implements SeekBar.OnSeekBarChangeListener, RadioButton.OnClickListener, Spinner.OnItemSelectedListener{
 
     private Face aidContrFace;
     private FaceView viewContr;
     private int actionButton = 0;
 
+    private SeekBar blue;
+    private SeekBar green;
+    private SeekBar red;
+
 
     public FaceController(FaceView view) {
         viewContr = view;
         aidContrFace = view.getFace();
+
     }
-
-
 
     @Override
     public void onClick(View v) {
@@ -69,54 +72,34 @@ public class FaceController implements SeekBar.OnSeekBarChangeListener, RadioBut
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-        int blue = aidContrFace.
-        int red;
-        int green;
 
-        //Anadir numero en face que sirva de referencia para los colores y cambiarlo.
-        switch (viewContr.getId()){
-            case R.id.blue:
-                 blue = i;
-                int newColor = Color.argb(255, red, green, blue);
-                break;
-            case R.id.red:
-                red = i;
-                newColor = Color.argb(255, red, green, blue);
-                break;
-            case R.id.green:
-                green = i;
-               newColor = Color.argb(255, red, green, blue);
-                break;
+        if(seekBar.getId() == R.id.blue){
+            viewContr.blueColorSeek = i;
+        }
+        else if(seekBar.getId() == R.id.green){
+            viewContr.greeColorSeek = i;
+        }
+        else if (seekBar.getId() == R.id.red){
+            viewContr.redColorSeek = i;
         }
 
-        //SeekBar red = findViewById(R.id.red);
-       // SeekBar blue = viewContr.findViewById(R.id.blue);
-       // SeekBar green = viewContr.findViewById(R.id.green);
+        int colorSeek = Color.argb(255, viewContr.redColorSeek,viewContr.greeColorSeek,viewContr.blueColorSeek);
 
-
-
-
-        //int redV = red.getProgress();
-       // int blueV = blue.getProgress();
-       // int greenV = green.getProgress();
-
-       int newColor = Color.argb(255, red, green, blue);
-
-        switch (actionButton) {
+        switch (actionButton){
             case 0:
-                return;
+                break;
             case 1:
-                aidContrFace.skinColor = newColor;
+                aidContrFace.skinColor = colorSeek;
                 break;
             case 2:
-                aidContrFace.eyeColor = newColor;
+                aidContrFace.eyeColor = colorSeek;
                 break;
             case 3:
-                aidContrFace.hairColor = newColor;
+                aidContrFace.hairColor = colorSeek;
                 break;
-
-
         }
+
+        aidContrFace.isRandom = false;
         viewContr.getColors();
         this.viewContr.invalidate();
 
@@ -129,6 +112,6 @@ public class FaceController implements SeekBar.OnSeekBarChangeListener, RadioBut
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-
+        seekBar.getProgress();
     }
 }

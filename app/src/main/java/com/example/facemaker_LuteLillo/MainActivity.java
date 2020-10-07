@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         Spinner styleHair = findViewById(R.id.spinner);
         styleHair.setOnItemSelectedListener(controller);
 
+
         SeekBar red = findViewById(R.id.red);
         red.setOnSeekBarChangeListener(controller);
         SeekBar blue = findViewById(R.id.blue);

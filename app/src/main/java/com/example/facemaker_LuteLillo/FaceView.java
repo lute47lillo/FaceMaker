@@ -18,6 +18,10 @@ public class FaceView extends SurfaceView{
     Paint paintEye = new Paint();
     Paint paintHair = new Paint();
 
+    int redColorSeek;
+    int blueColorSeek;
+    int greeColorSeek;
+
     private float centerX = 550.0f;
     private float centerY = 500.0f;
     private float height=800.0f;
@@ -68,7 +72,7 @@ public class FaceView extends SurfaceView{
             canvas.drawOval(centerX - width / 3, centerY - height / 3, centerX + width / 2, centerY + height / 2, paintFace);
 
         }else{
-            paintFace.setColor(0xFFE5BFAB);
+            getColors();
             canvas.drawOval(centerX - width / 3, centerY - height / 3, centerX + width / 2, centerY + height / 2, paintFace);
         }
     }
@@ -130,7 +134,7 @@ public class FaceView extends SurfaceView{
            float widthHair = centerX + width / 5;
            float heightHair = centerY - 150.0f;
 
-           paintHair.setColor(Color.MAGENTA);
+           getColors();
            canvas.drawOval(leftHair, topHair, widthHair, heightHair, paintHair);
 
        }else if (aidFace.hairStyle == 1){
@@ -147,7 +151,7 @@ public class FaceView extends SurfaceView{
            float widthHair = centerX + width /3 ;
            float heightHair = centerY - 150.0f;
 
-           paintHair.setColor(Color.GRAY);
+           getColors();
            canvas.drawOval(leftHair, topHair, widthHair, heightHair, paintHair);
 
            leftHair = centerX * 2.3f - width +200.0f  ;
